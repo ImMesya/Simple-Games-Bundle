@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "RockPaperScissors.h"
 
 int main() {
 	Vector2f resolution;
@@ -8,6 +9,7 @@ int main() {
 
 	RenderWindow menuWindow(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
 	MainMenu mainMenu(resolution.x, resolution.y);
+	RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
 
 	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -17,9 +19,11 @@ int main() {
 		
 		while (menuWindow.pollEvent(event))
 		{
-			// Menu control
-			if (event.type == Event::KeyPressed)
+			switch (event.type)
 			{
+			case Event::Closed:
+				menuWindow.close();
+			case Event::KeyPressed:
 				if (event.key.code == Keyboard::Up)
 				{
 					mainMenu.moveUp();
@@ -44,24 +48,43 @@ int main() {
 							Event eventRPS;
 							while (RPS.pollEvent(eventRPS))
 							{
-								if (eventRPS.type == Event::Closed)
+								switch (eventRPS.type)
 								{
+								case Event::Closed:
 									RPS.close();
-								}
+								case Event::KeyPressed:
+									if (eventRPS.key.code == Keyboard::Left)
+									{
+										rockPaperScissors.moveLeft();
+										break;
+									}
 
-								if (eventRPS.type == Event::KeyPressed)
-								{
+									if (eventRPS.key.code == Keyboard::Right)
+									{
+										rockPaperScissors.moveRight();
+										break;
+									}
+
+									if (eventRPS.key.code == Keyboard::Return)
+									{
+										rockPaperScissors.RPSPressed(resolution);
+										break;
+									}
+
 									if (eventRPS.key.code == Keyboard::Escape)
 									{
 										RPS.close();
 									}
+								default:
+									break;
 								}
+								RPS.clear();
+								rockPaperScissors.draw(RPS);
+								RPS.display();
 							}
-							RPS.clear();
-							RPS.display();
 						}
 					}
-						
+
 					if (x == 1)
 					{
 						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
@@ -87,7 +110,7 @@ int main() {
 							TTT.display();
 						}
 					}
-						
+
 					if (x == 2)
 					{
 						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
@@ -124,8 +147,9 @@ int main() {
 				{
 					menuWindow.close();
 				}
+			default:
+				break;
 			}
-
 		}
 		menuWindow.clear();
 		mainMenu.draw(menuWindow);
