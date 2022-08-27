@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <sstream>
 
 using namespace sf;
 using namespace std;
@@ -41,4 +42,10 @@ private:
 	Font font;
 	Text textRPS[3];
 	Text winner;
+
+	Text urWins;
+	Text botWins;
+
+	int urWinsCount = 0;
+	int botWinsCount = 0;
 };

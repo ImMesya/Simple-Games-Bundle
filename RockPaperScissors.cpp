@@ -48,11 +48,27 @@ RockPaperScissors::RockPaperScissors(float width, float height)
 		cout << "Font not found";
 	}
 
+	stringstream ssPlayer;
+	stringstream ssBot;
+	
+
 	winner.setFont(font);
+	urWins.setFont(font);
+	botWins.setFont(font);
 	winner.setFillColor(Color::White);
+	urWins.setFillColor(Color::White);
+	botWins.setFillColor(Color::White);
 	winner.setCharacterSize(characterSize);
+	urWins.setCharacterSize(characterSize);
+	botWins.setCharacterSize(characterSize);
 	winner.setString("Choose one of the following options");
+	ssPlayer << "Your wins - " << urWinsCount;
+	urWins.setString(ssPlayer.str());
+	ssBot << "Computer wins - " << botWinsCount;
+	botWins.setString(ssBot.str());
 	winner.setPosition(width / 2.5, height / 2.5);
+	urWins.setPosition(20, 10);
+	botWins.setPosition(20, 90);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -87,6 +103,8 @@ void RockPaperScissors::draw(RenderWindow& window)
 	window.draw(botPaper);
 	window.draw(botRock);
 	window.draw(botScissors);
+	window.draw(urWins);
+	window.draw(botWins);
 	
 	for (int i = 0; i < 3; i++)
 	{
@@ -129,38 +147,60 @@ void RockPaperScissors::RPSPressed(Vector2f resolution)
 {
 	int bot = rand() % 3;
 
+	stringstream ssPlayer;
+	stringstream ssBot;
+
 	botRock.setPosition(-spriteWidth, -spriteHeight);
 	botPaper.setPosition(-spriteWidth, -spriteHeight);
 	botScissors.setPosition(-spriteWidth, -spriteHeight);
 
-	if (bot == 1 && RPSSelected == 0) {
+	if (bot == 1 && RPSSelected == 0) 
+	{
+		botWinsCount++;
 		botPaper.setPosition(resolution.x / 2 + spriteWidth / 2, resolution.y / 4);
 		winner.setString("Computer Wins! Paper wraps Rock.");
+		ssBot << "Computer wins - " << botWinsCount;
+		botWins.setString(ssBot.str());
 	}
 	else if (bot == 2 && RPSSelected == 1)
 	{
+		botWinsCount++;
 		botScissors.setPosition(resolution.x / 2 + spriteWidth/2, resolution.y / 4);
 		winner.setString("Computer Wins! Scissors cut Paper.");
+		ssBot << "Computer wins - " << botWinsCount;
+		botWins.setString(ssBot.str());
 	}
 	else if (bot == 0 && RPSSelected == 2)
 	{
+		botWinsCount++;
 		botRock.setPosition(resolution.x / 2 + spriteWidth / 2, resolution.y / 4);
 		winner.setString("Computer Wins! Rock smashes Scissors.");
+		ssBot << "Computer wins - " << botWinsCount;
+		botWins.setString(ssBot.str());
 	}
 	else if (RPSSelected == 0 && bot == 2) 
 	{
+		urWinsCount++;
 		botScissors.setPosition(resolution.x / 2 + spriteWidth / 2, resolution.y / 4);
 		winner.setString("You Win! Rock smashes Scissors.");
+		ssPlayer << "Your wins - " << urWinsCount;
+		urWins.setString(ssPlayer.str());
 	}
 	else if (RPSSelected == 1 && bot == 0) 
 	{
+		urWinsCount++;
 		botRock.setPosition(resolution.x / 2 + spriteWidth / 2, resolution.y / 4);
 		winner.setString("You Win! Paper wraps Rock.");
+		ssPlayer << "Your wins - " << urWinsCount;
+		urWins.setString(ssPlayer.str());
 	}
 	else if (RPSSelected == 2 && bot == 1) 
 	{
+		urWinsCount++;
 		botPaper.setPosition(resolution.x / 2 + spriteWidth / 2, resolution.y / 4);
 		winner.setString("You Win! Scissors cut Paper.");
+		ssPlayer << "Your wins - " << urWinsCount;
+		urWins.setString(ssPlayer.str());
 	}
 	else 
 	{

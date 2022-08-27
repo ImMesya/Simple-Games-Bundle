@@ -155,4 +155,5 @@ int main() {
 		mainMenu.draw(menuWindow);
 		menuWindow.display();
 	}
+	return 0;
 }
