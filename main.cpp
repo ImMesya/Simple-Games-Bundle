@@ -1,104 +1,134 @@
 #include "MainMenu.h"
 
 int main() {
-	enum class State {MENU, ROCK_PAPER_SCISSORS, TIC_TAC_TOE, GUESS_NUM};
-	State state = State::MENU;
-
 	Vector2f resolution;
 
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
-	RenderWindow window(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
-	RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
-	RPS.setActive(false);
-
+	RenderWindow menuWindow(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
 	MainMenu mainMenu(resolution.x, resolution.y);
 
 	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
 
-	while (window.isOpen())
+	while (menuWindow.isOpen())
 	{
 		Event event;
 		
-		while (window.pollEvent(event))
+		while (menuWindow.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
-			{
-				window.close();
-			}
-
 			// Menu control
-			if (state == State::MENU)
+			if (event.type == Event::KeyPressed)
 			{
-				if (event.type == Event::KeyPressed)
+				if (event.key.code == Keyboard::Up)
 				{
-					if (event.key.code == Keyboard::Up)
+					mainMenu.moveUp();
+					break;
+				}
+
+				if (event.key.code == Keyboard::Down)
+				{
+					mainMenu.moveDown();
+					break;
+				}
+
+				// select game
+				if (event.key.code == Keyboard::Return)
+				{
+					int x = mainMenu.mainMenuPressed();
+					if (x == 0)
 					{
-						mainMenu.moveUp();
-						break;
+						RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
+						while (RPS.isOpen())
+						{
+							Event eventRPS;
+							while (RPS.pollEvent(eventRPS))
+							{
+								if (eventRPS.type == Event::Closed)
+								{
+									RPS.close();
+								}
+
+								if (eventRPS.type == Event::KeyPressed)
+								{
+									if (eventRPS.key.code == Keyboard::Escape)
+									{
+										RPS.close();
+									}
+								}
+							}
+							RPS.clear();
+							RPS.display();
+						}
+					}
+						
+					if (x == 1)
+					{
+						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
+						while (TTT.isOpen())
+						{
+							Event eventTTT;
+							while (TTT.pollEvent(eventTTT))
+							{
+								if (eventTTT.type == Event::Closed)
+								{
+									TTT.close();
+								}
+
+								if (eventTTT.type == Event::KeyPressed)
+								{
+									if (eventTTT.key.code == Keyboard::Escape)
+									{
+										TTT.close();
+									}
+								}
+							}
+							TTT.clear();
+							TTT.display();
+						}
+					}
+						
+					if (x == 2)
+					{
+						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
+						while (GtN.isOpen())
+						{
+							Event eventGtN;
+							while (GtN.pollEvent(eventGtN))
+							{
+								if (eventGtN.type == Event::Closed)
+								{
+									GtN.close();
+								}
+
+								if (eventGtN.type == Event::KeyPressed)
+								{
+									if (eventGtN.key.code == Keyboard::Escape)
+									{
+										GtN.close();
+									}
+								}
+							}
+							GtN.clear();
+							GtN.display();
+						}
 					}
 
-					if (event.key.code == Keyboard::Down)
+					if (x == 3)
 					{
-						mainMenu.moveDown();
-						break;
-					}
-
-					if (event.key.code == Keyboard::Return)
-					{
-						int x = mainMenu.mainMenuPressed();
-						if (x == 0)
-						{
-							state = State::ROCK_PAPER_SCISSORS;
-							
-						}
-						
-						if (x == 1)
-						{
-							//state = State::TIC_TAC_TOE;
-							RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
-						}
-						
-						if (x == 2)
-						{
-							//state = State::GUESS_NUM;
-							RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Guess the Number");
-						}
-
-						if (x == 3)
-						{
-							window.close();
-						}
+						menuWindow.close();
 					}
 				}
 
+				if (event.key.code == Keyboard::Escape)
+				{
+					menuWindow.close();
+				}
 			}
 
-			if (state == State::ROCK_PAPER_SCISSORS)
-			{
-				RPS.setActive(true);
-				
-			}
-
-			if (state == State::TIC_TAC_TOE)
-			{
-
-			}
-
-			if (state == State::GUESS_NUM)
-			{
-
-			}
 		}
-
-
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
-		{
-			window.close();
-		}
-		window.clear();
-		mainMenu.draw(window);
-		window.display();
+		menuWindow.clear();
+		mainMenu.draw(menuWindow);
+		menuWindow.display();
 	}
 }
