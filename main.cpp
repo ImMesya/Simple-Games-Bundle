@@ -3,7 +3,7 @@
 #include "games/GuessTheNumber.h"
 
 int main() {
-	Vector2f resolution;
+	Vector2f resolution; 
 
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
