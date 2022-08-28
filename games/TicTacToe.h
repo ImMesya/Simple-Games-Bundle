@@ -26,4 +26,8 @@ private:
 
 	bool isXTurn = true;
 	bool isDraw = false;
+	bool isWinner = false;
+
+	Text instructions;
+	Font font;
 };

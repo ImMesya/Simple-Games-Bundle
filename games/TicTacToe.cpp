@@ -2,6 +2,11 @@
 
 TicTacToe::TicTacToe(Vector2f resolution)
 {
+	if (!font.loadFromFile("fonts/JellyBomb.ttf"))
+	{
+		cout << "Font not found";
+	}
+
 	if (!grid.loadFromFile("images/ttt_grid.png"))
 	{
 		cout << "No texture grid";
@@ -19,6 +24,12 @@ TicTacToe::TicTacToe(Vector2f resolution)
 		cout << "No texture blank";
 	}
 
+	instructions.setFont(font);
+	instructions.setCharacterSize(70);
+	instructions.setString("X - Your first turn.");
+	instructions.setOrigin(instructions.getLocalBounds().width / 2, instructions.getLocalBounds().height / 2);
+	instructions.setPosition(resolution.x / 2, resolution.y / 8);
+	
 	gridSprite.setTexture(grid);
 	gridSprite.setPosition(resolution.x / 2, resolution.y / 2);
 	gridSprite.setOrigin(gridSprite.getLocalBounds().width / 2, gridSprite.getLocalBounds().height / 2);
@@ -49,6 +60,8 @@ TicTacToe::TicTacToe(Vector2f resolution)
 void TicTacToe::draw(RenderWindow& window)
 {
 	window.draw(gridSprite);
+	window.draw(instructions);
+
 	for (int i = 1; i < 10; i++)
 	{
 		window.draw(blankSprite[i]);
@@ -64,29 +77,46 @@ void TicTacToe::turn(int mouseX, int mouseY)
 		{
 			if (isXTurn)
 			{
-				blankSprite[i].setTexture(markX);
+				if (!isWinner)
+				{
+					blankSprite[i].setTexture(markX);
+				}
+				
 				if (checkWinner(markX))
 				{
-					cout << "MARK_X is Winner!" << endl;
+					instructions.setString("X - is Winner! Press R to Restart");
+					isWinner = true;
+					break;
 				}
 				else if (isDraw)
 				{
-					cout << "It's Draw! Press R to Restart" << endl;
+					instructions.setString("It's Draw! Press R to Restart");
+					isWinner = true;
+					break;
 				}
 				isXTurn = false;
+				instructions.setString("O - your turn.");
 			}
 			else
 			{
-				blankSprite[i].setTexture(markO);
+				if (!isWinner)
+				{
+					blankSprite[i].setTexture(markO);
+				}
 				if (checkWinner(markO))
 				{
-					cout << "MARK_O is Winner!" << endl;
+					instructions.setString("O - is Winner! Press R to Restart");
+					isWinner = true;
+					break;
 				}
 				else if (isDraw)
 				{
-					cout << "It's Draw! Press R to Restart" << endl;
+					instructions.setString("It's Draw! Press R to Restart");
+					isWinner = true;
+					break;
 				}
 				isXTurn = true;
+				instructions.setString("X - your turn.");
 			}
 			
 		}
@@ -130,6 +160,8 @@ void TicTacToe::restart()
 {
 	isDraw = false;
 	isXTurn = true;
+	isWinner = false;
+	instructions.setString("X - Your first turn.");
 
 	for (int i = 1; i < 10; i++)
 	{
