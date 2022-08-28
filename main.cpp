@@ -26,19 +26,19 @@ int main() {
 			{
 				menuWindow.close();
 			}
-			if (event.type == Event::KeyPressed)
+			else if (event.type == Event::KeyPressed)
 				if (event.key.code == Keyboard::Up)
 				{
 					mainMenu.moveUp();
 				}
 
-				if (event.key.code == Keyboard::Down)
+				else if (event.key.code == Keyboard::Down)
 				{
 					mainMenu.moveDown();
 				}
 
 				// select game
-				if (event.key.code == Keyboard::Return)
+				else if (event.key.code == Keyboard::Return)
 				{
 					if (mainMenu.mainMenuPressed() == 0)
 					{
@@ -50,23 +50,23 @@ int main() {
 							{
 								if (eventRPS.type == Event::Closed)
 									RPS.close();
-								if (eventRPS.type == Event::KeyPressed)
+								else if (eventRPS.type == Event::KeyPressed)
 									if (eventRPS.key.code == Keyboard::Left)
 									{
 										rockPaperScissors.moveLeft();
 									}
 
-									if (eventRPS.key.code == Keyboard::Right)
+									else if (eventRPS.key.code == Keyboard::Right)
 									{
 										rockPaperScissors.moveRight();
 									}
 
-									if (eventRPS.key.code == Keyboard::Return)
+									else if (eventRPS.key.code == Keyboard::Return)
 									{
 										rockPaperScissors.RPSPressed(resolution);
 									}
 
-									if (eventRPS.key.code == Keyboard::Escape)
+									else if (eventRPS.key.code == Keyboard::Escape)
 									{
 										RPS.close();
 									}
@@ -77,7 +77,7 @@ int main() {
 						}
 					}
 
-					if (mainMenu.mainMenuPressed() == 1)
+					else if (mainMenu.mainMenuPressed() == 1)
 					{
 						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
 						while (TTT.isOpen())
@@ -90,7 +90,7 @@ int main() {
 									TTT.close();
 								}
 
-								if (eventTTT.type == Event::KeyPressed)
+								else if (eventTTT.type == Event::KeyPressed)
 								{
 									if (eventTTT.key.code == Keyboard::Escape)
 									{
@@ -103,7 +103,7 @@ int main() {
 						}
 					}
 
-					if (mainMenu.mainMenuPressed() == 2)
+					else if (mainMenu.mainMenuPressed() == 2)
 					{
 						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
 						while (GtN.isOpen())
@@ -116,21 +116,21 @@ int main() {
 									GtN.close();
 								}
 
-								if (eventGtN.type == Event::KeyPressed)
+								else if (eventGtN.type == Event::KeyPressed)
 								{
 									if (eventGtN.key.code == Keyboard::Escape)
 									{
 										GtN.close();
 									}
-									if (eventGtN.key.code == Keyboard::Left)
+									else if (eventGtN.key.code == Keyboard::Left)
 									{
 										guessTheNum.moveLeft();
 									}
-									if (eventGtN.key.code == Keyboard::Right)
+									else if (eventGtN.key.code == Keyboard::Right)
 									{
 										guessTheNum.moveRight();
 									}
-									if (eventGtN.key.code == Keyboard::Return)
+									else if (eventGtN.key.code == Keyboard::Return)
 									{
 										guessTheNum.playerGuess();
 									}
@@ -142,13 +142,13 @@ int main() {
 						}
 					}
 
-					if (mainMenu.mainMenuPressed() == 3)
+					else if (mainMenu.mainMenuPressed() == 3)
 					{
 						menuWindow.close();
 					}
 				}
 
-				if (event.key.code == Keyboard::Escape)
+				else if (event.key.code == Keyboard::Escape)
 				{
 					menuWindow.close();
 				}
