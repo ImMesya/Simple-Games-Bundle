@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\games">
+      <UniqueIdentifier>{35840527-ff82-4cc3-8476-ee541a05d5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\games">
+      <UniqueIdentifier>{3aa1a916-6cc7-484d-b159-d73f85342bcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -22,7 +28,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RockPaperScissors.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\games</Filter>
+    </ClCompile>
+    <ClCompile Include="GuessTheNumber.cpp">
+      <Filter>Source Files\games</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,7 +39,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RockPaperScissors.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\games</Filter>
+    </ClInclude>
+    <ClInclude Include="GuessTheNumber.h">
+      <Filter>Header Files\games</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

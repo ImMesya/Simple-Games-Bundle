@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "RockPaperScissors.h"
+#include "GuessTheNumber.h"
 
 int main() {
 	Vector2f resolution;
@@ -10,6 +11,7 @@ int main() {
 	RenderWindow menuWindow(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
 	MainMenu mainMenu(resolution.x, resolution.y);
 	RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
+	GuessTheNumber guessTheNum(resolution);
 
 	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -19,28 +21,25 @@ int main() {
 		
 		while (menuWindow.pollEvent(event))
 		{
-			switch (event.type)
+			if (event.type == Event::Closed)
 			{
-			case Event::Closed:
 				menuWindow.close();
-			case Event::KeyPressed:
+			}
+			if (event.type == Event::KeyPressed)
 				if (event.key.code == Keyboard::Up)
 				{
 					mainMenu.moveUp();
-					break;
 				}
 
 				if (event.key.code == Keyboard::Down)
 				{
 					mainMenu.moveDown();
-					break;
 				}
 
 				// select game
 				if (event.key.code == Keyboard::Return)
 				{
-					int x = mainMenu.mainMenuPressed();
-					if (x == 0)
+					if (mainMenu.mainMenuPressed() == 0)
 					{
 						RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
 						while (RPS.isOpen())
@@ -48,36 +47,28 @@ int main() {
 							Event eventRPS;
 							while (RPS.pollEvent(eventRPS))
 							{
-								switch (eventRPS.type)
-								{
-								case Event::Closed:
+								if (eventRPS.type == Event::Closed)
 									RPS.close();
-								case Event::KeyPressed:
+								if (eventRPS.type == Event::KeyPressed)
 									if (eventRPS.key.code == Keyboard::Left)
 									{
 										rockPaperScissors.moveLeft();
-										break;
 									}
 
 									if (eventRPS.key.code == Keyboard::Right)
 									{
 										rockPaperScissors.moveRight();
-										break;
 									}
 
 									if (eventRPS.key.code == Keyboard::Return)
 									{
 										rockPaperScissors.RPSPressed(resolution);
-										break;
 									}
 
 									if (eventRPS.key.code == Keyboard::Escape)
 									{
 										RPS.close();
 									}
-								default:
-									break;
-								}
 								RPS.clear();
 								rockPaperScissors.draw(RPS);
 								RPS.display();
@@ -85,7 +76,7 @@ int main() {
 						}
 					}
 
-					if (x == 1)
+					if (mainMenu.mainMenuPressed() == 1)
 					{
 						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
 						while (TTT.isOpen())
@@ -111,7 +102,7 @@ int main() {
 						}
 					}
 
-					if (x == 2)
+					if (mainMenu.mainMenuPressed() == 2)
 					{
 						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
 						while (GtN.isOpen())
@@ -130,14 +121,27 @@ int main() {
 									{
 										GtN.close();
 									}
+									if (eventGtN.key.code == Keyboard::Left)
+									{
+										guessTheNum.moveLeft();
+									}
+									if (eventGtN.key.code == Keyboard::Right)
+									{
+										guessTheNum.moveRight();
+									}
+									if (eventGtN.key.code == Keyboard::Return)
+									{
+										guessTheNum.playerGuess();
+									}
 								}
 							}
 							GtN.clear();
+							guessTheNum.draw(GtN);
 							GtN.display();
 						}
 					}
 
-					if (x == 3)
+					if (mainMenu.mainMenuPressed() == 3)
 					{
 						menuWindow.close();
 					}
@@ -147,9 +151,6 @@ int main() {
 				{
 					menuWindow.close();
 				}
-			default:
-				break;
-			}
 		}
 		menuWindow.clear();
 		mainMenu.draw(menuWindow);

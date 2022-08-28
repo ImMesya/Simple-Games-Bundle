@@ -133,11 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GuessTheNumber.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="RockPaperScissors.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GuessTheNumber.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="RockPaperScissors.h" />
   </ItemGroup>
