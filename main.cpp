@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "games/RockPaperScissors.h"
 #include "games/GuessTheNumber.h"
+#include "games/TicTacToe.h"
 
 int main() {
 	Vector2f resolution;
@@ -13,6 +14,7 @@ int main() {
 	MainMenu mainMenu(resolution.x, resolution.y);
 	RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
 	GuessTheNumber guessTheNum(resolution);
+	TicTacToe ticTacToe(resolution);
 
 	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -26,6 +28,7 @@ int main() {
 			{
 				menuWindow.close();
 			}
+
 			else if (event.type == Event::KeyPressed)
 				if (event.key.code == Keyboard::Up)
 				{
@@ -37,9 +40,9 @@ int main() {
 					mainMenu.moveDown();
 				}
 
-				// select game
 				else if (event.key.code == Keyboard::Return)
 				{
+					// If player choose Rock Paper Scissors game
 					if (mainMenu.mainMenuPressed() == 0)
 					{
 						RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
@@ -77,6 +80,7 @@ int main() {
 						}
 					}
 
+					// If player choose Tic Tac Toe game
 					else if (mainMenu.mainMenuPressed() == 1)
 					{
 						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
@@ -96,13 +100,26 @@ int main() {
 									{
 										TTT.close();
 									}
+									else if (eventTTT.key.code == Keyboard::R)
+									{
+										ticTacToe.restart();
+									}
+								}
+								else if (eventTTT.type == Event::MouseButtonPressed)
+								{
+									if (eventTTT.mouseButton.button == Mouse::Left)
+									{
+										ticTacToe.turn(eventTTT.mouseButton.x, eventTTT.mouseButton.y);
+									}
 								}
 							}
 							TTT.clear();
+							ticTacToe.draw(TTT);
 							TTT.display();
 						}
 					}
 
+					// If player choose Guess The Number game
 					else if (mainMenu.mainMenuPressed() == 2)
 					{
 						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
@@ -142,6 +159,7 @@ int main() {
 						}
 					}
 
+					// If player choose EXIT button
 					else if (mainMenu.mainMenuPressed() == 3)
 					{
 						menuWindow.close();
