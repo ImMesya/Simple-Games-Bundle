@@ -9,6 +9,7 @@ int main() {
 	resolution.y = VideoMode::getDesktopMode().height;
 
 	RenderWindow menuWindow(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
+
 	MainMenu mainMenu(resolution.x, resolution.y);
 	RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
 	GuessTheNumber guessTheNum(resolution);
