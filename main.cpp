@@ -1,6 +1,6 @@
 #include "MainMenu.h"
-#include "RockPaperScissors.h"
-#include "GuessTheNumber.h"
+#include "games/RockPaperScissors.h"
+#include "games/GuessTheNumber.h"
 
 int main() {
 	Vector2f resolution;
