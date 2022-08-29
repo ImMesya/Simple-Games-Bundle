@@ -12,10 +12,6 @@ int main() {
 	RenderWindow menuWindow(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
 
 	MainMenu mainMenu(resolution.x, resolution.y);
-	RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
-	GuessTheNumber guessTheNum(resolution);
-	TicTacToe ticTacToe(resolution);
-
 	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
 
 	while (menuWindow.isOpen())
@@ -45,6 +41,7 @@ int main() {
 					// If player choose Rock Paper Scissors game
 					if (mainMenu.mainMenuPressed() == 0)
 					{
+						RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
 						RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
 						while (RPS.isOpen())
 						{
@@ -73,16 +70,18 @@ int main() {
 									{
 										RPS.close();
 									}
-								RPS.clear();
-								rockPaperScissors.draw(RPS);
-								RPS.display();
 							}
+
+							RPS.clear();
+							rockPaperScissors.draw(RPS);
+							RPS.display();
 						}
 					}
 
 					// If player choose Tic Tac Toe game
 					else if (mainMenu.mainMenuPressed() == 1)
 					{
+						TicTacToe ticTacToe(resolution);
 						RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
 						while (TTT.isOpen())
 						{
@@ -122,6 +121,7 @@ int main() {
 					// If player choose Guess The Number game
 					else if (mainMenu.mainMenuPressed() == 2)
 					{
+						GuessTheNumber guessTheNum(resolution);
 						RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
 						while (GtN.isOpen())
 						{
