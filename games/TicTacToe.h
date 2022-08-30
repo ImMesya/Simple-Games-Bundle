@@ -7,7 +7,7 @@ using namespace sf;
 class TicTacToe 
 {
 public:
-	TicTacToe(Vector2f resolution);
+	explicit TicTacToe(Vector2f resolution);
 
 	void draw(RenderWindow& window);
 

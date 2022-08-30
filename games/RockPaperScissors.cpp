@@ -115,32 +115,26 @@ void RockPaperScissors::draw(RenderWindow& window)
 
 void RockPaperScissors::moveLeft()
 {
-	if (RPSSelected >= 0)
-	{
-		textRPS[RPSSelected].setFillColor(Color::White);
+	textRPS[RPSSelected].setFillColor(Color::White);
 
-		RPSSelected--;
-		if (RPSSelected == -1)
-		{
-			RPSSelected = 2;
-		}
-		textRPS[RPSSelected].setFillColor(Color::Blue);
+	RPSSelected--;
+	if (RPSSelected == -1)
+	{
+		RPSSelected = 2;
 	}
+	textRPS[RPSSelected].setFillColor(Color::Blue);
 }
 
 void RockPaperScissors::moveRight()
 {
-	if (RPSSelected <= 3)
-	{
-		textRPS[RPSSelected].setFillColor(Color::White);
+	textRPS[RPSSelected].setFillColor(Color::White);
 
-		RPSSelected++;
-		if (RPSSelected == 3)
-		{
-			RPSSelected = 0;
-		}
-		textRPS[RPSSelected].setFillColor(Color::Blue);
+	RPSSelected++;
+	if (RPSSelected == 3)
+	{
+		RPSSelected = 0;
 	}
+	textRPS[RPSSelected].setFillColor(Color::Blue);
 }
 
 void RockPaperScissors::RPSPressed(Vector2f resolution)

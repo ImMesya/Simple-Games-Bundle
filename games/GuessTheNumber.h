@@ -9,7 +9,7 @@ using namespace std;
 class GuessTheNumber
 {
 public:
-	GuessTheNumber(Vector2f resolution);
+	explicit GuessTheNumber(Vector2f resolution);
 
 	void moveLeft();
 	void moveRight();

@@ -30,32 +30,26 @@ GuessTheNumber::GuessTheNumber(Vector2f resolution)
 
 void GuessTheNumber::moveLeft()
 {
-	if (numberSelected >= 0)
-	{
-		numbers[numberSelected].setFillColor(Color::White);
+	numbers[numberSelected].setFillColor(Color::White);
 
-		numberSelected--;
-		if (numberSelected == -1)
-		{
-			numberSelected = 9;
-		}
-		numbers[numberSelected].setFillColor(Color::Blue);
+	numberSelected--;
+	if (numberSelected == -1)
+	{
+		numberSelected = 9;
 	}
+	numbers[numberSelected].setFillColor(Color::Blue);
 }
 
 void GuessTheNumber::moveRight()
 {
-	if (numberSelected <= 10)
-	{
-		numbers[numberSelected].setFillColor(Color::White);
+	numbers[numberSelected].setFillColor(Color::White);
 
-		numberSelected++;
-		if (numberSelected == 10)
-		{
-			numberSelected = 0;
-		}
-		numbers[numberSelected].setFillColor(Color::Blue);
+	numberSelected++;
+	if (numberSelected == 10)
+	{
+		numberSelected = 0;
 	}
+	numbers[numberSelected].setFillColor(Color::Blue);
 }
 void GuessTheNumber::playerGuess()
 {
