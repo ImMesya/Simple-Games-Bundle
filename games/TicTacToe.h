@@ -1,33 +1,30 @@
+#pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
-using namespace std;
-using namespace sf;
-
-class TicTacToe 
+class tic_tac_toe
 {
 public:
-	explicit TicTacToe(Vector2f resolution);
+    explicit tic_tac_toe(sf::Vector2f resolution);
 
-	void draw(RenderWindow& window);
+    void draw(sf::RenderWindow& window);
 
-	void turn(int mouseX, int mouseY);
-	void restart();
-	bool checkWinner(Texture &mark);
+    void turn(int mouse_x, int mouse_y);
+    void restart();
+    bool check_winner(sf::Texture& mark);
 
 private:
-	Texture grid;
-	Texture markX;
-	Texture markO;
-	Texture blank;
+    sf::Texture grid_;
+    sf::Texture mark_x_;
+    sf::Texture mark_o_;
+    sf::Texture blank_;
 
-	Sprite gridSprite;
-	Sprite blankSprite[10];
+    sf::Sprite grid_sprite_;
+    sf::Sprite blank_sprite_[10];
 
-	bool isXTurn = true;
-	bool isDraw = false;
-	bool isWinner = false;
+    bool is_x_turn_ = true;
+    bool is_draw_ = false;
+    bool is_winner_ = false;
 
-	Text instructions;
-	Font font;
+    sf::Text instructions_;
+    sf::Font font_;
 };

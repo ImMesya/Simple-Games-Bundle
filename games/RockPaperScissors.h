@@ -1,51 +1,44 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <ctime>
-#include <string>
-#include <sstream>
 
-using namespace sf;
-using namespace std;
-
-class RockPaperScissors
+class rock_paper_scissors
 {
 public:
-	RockPaperScissors(float width, float height);
+    rock_paper_scissors(float width, float height);
 
-	void draw(RenderWindow& window);
+    void draw(sf::RenderWindow& window);
 
-	void moveLeft();
-	void moveRight();
+    void move_left();
+    void move_right();
 
-	void RPSPressed(Vector2f resolution);
+    void rps_pressed(sf::Vector2f resolution);
 
 private:
-	const int spriteWidth = 108;
-	const int spriteHeight = 162;
+    const int sprite_width_ = 108;
+    const int sprite_height_ = 162;
 
-	Texture rock;
-	Texture paper;
-	Texture scissors;
+    sf::Texture rock_;
+    sf::Texture paper_;
+    sf::Texture scissors_;
 
-	Sprite rockSprite;
-	Sprite paperSprite;
-	Sprite scissorsSprite;
+    sf::Sprite rock_sprite_;
+    sf::Sprite paper_sprite_;
+    sf::Sprite scissors_sprite_;
 
-	Sprite botRock;
-	Sprite botPaper;
-	Sprite botScissors;
+    sf::Sprite bot_rock_;
+    sf::Sprite bot_paper_;
+    sf::Sprite bot_scissors_;
 
-	int RPSSelected = 0;
+    int rps_selected_ = 0;
 
-	const int characterSize = 70;
-	Font font;
-	Text textRPS[3];
-	Text winner;
+    const int character_size_ = 70;
+    sf::Font font_;
+    sf::Text text_rps_[3];
+    sf::Text winner_;
 
-	Text urWins;
-	Text botWins;
+    sf::Text ur_wins_;
+    sf::Text bot_wins_;
 
-	int urWinsCount = 0;
-	int botWinsCount = 0;
+    int ur_wins_count_ = 0;
+    int bot_wins_count_ = 0;
 };

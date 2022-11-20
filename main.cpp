@@ -5,158 +5,157 @@
 
 int main()
 {
-    Vector2f resolution;
+    sf::Vector2f resolution;
 
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = sf::VideoMode::getDesktopMode().width;
+    resolution.y = sf::VideoMode::getDesktopMode().height;
 
-    RenderWindow menu_window(VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
+    sf::RenderWindow menu_window(sf::VideoMode(resolution.x, resolution.y), "Simple Games Bundle");
 
     main_menu main_menu(resolution.x, resolution.y);
-    View main_view(FloatRect(0, 0, resolution.x, resolution.y));
 
     while (menu_window.isOpen())
     {
-        Event event;
+        sf::Event event;
 
         while (menu_window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
             {
                 menu_window.close();
             }
 
-            else if (event.type == Event::KeyPressed)
-                if (event.key.code == Keyboard::Up)
+            else if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Up)
                 {
                     main_menu.move_up();
                 }
 
-                else if (event.key.code == Keyboard::Down)
+                else if (event.key.code == sf::Keyboard::Down)
                 {
                     main_menu.move_down();
                 }
 
-                else if (event.key.code == Keyboard::Return)
+                else if (event.key.code == sf::Keyboard::Return)
                 {
                     // If player choose Rock Paper Scissors game
                     if (main_menu.main_menu_pressed() == 0)
                     {
-                        RockPaperScissors rockPaperScissors(resolution.x, resolution.y);
-                        RenderWindow RPS(VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
-                        while (RPS.isOpen())
+                        rock_paper_scissors rock_paper_scissors(resolution.x, resolution.y);
+                        sf::RenderWindow rps(sf::VideoMode(resolution.x, resolution.y), "Rock Paper Scissors");
+                        while (rps.isOpen())
                         {
-                            Event eventRPS;
-                            while (RPS.pollEvent(eventRPS))
+                            sf::Event event_rps;
+                            while (rps.pollEvent(event_rps))
                             {
-                                if (eventRPS.type == Event::Closed)
-                                    RPS.close();
-                                else if (eventRPS.type == Event::KeyPressed)
-                                    if (eventRPS.key.code == Keyboard::Left)
+                                if (event_rps.type == sf::Event::Closed)
+                                    rps.close();
+                                else if (event_rps.type == sf::Event::KeyPressed)
+                                    if (event_rps.key.code == sf::Keyboard::Left)
                                     {
-                                        rockPaperScissors.moveLeft();
+                                        rock_paper_scissors.move_left();
                                     }
 
-                                    else if (eventRPS.key.code == Keyboard::Right)
+                                    else if (event_rps.key.code == sf::Keyboard::Right)
                                     {
-                                        rockPaperScissors.moveRight();
+                                        rock_paper_scissors.move_right();
                                     }
 
-                                    else if (eventRPS.key.code == Keyboard::Return)
+                                    else if (event_rps.key.code == sf::Keyboard::Return)
                                     {
-                                        rockPaperScissors.RPSPressed(resolution);
+                                        rock_paper_scissors.rps_pressed(resolution);
                                     }
 
-                                    else if (eventRPS.key.code == Keyboard::Escape)
+                                    else if (event_rps.key.code == sf::Keyboard::Escape)
                                     {
-                                        RPS.close();
+                                        rps.close();
                                     }
                             }
 
-                            RPS.clear();
-                            rockPaperScissors.draw(RPS);
-                            RPS.display();
+                            rps.clear();
+                            rock_paper_scissors.draw(rps);
+                            rps.display();
                         }
                     }
 
                     // If player choose Tic Tac Toe game
                     else if (main_menu.main_menu_pressed() == 1)
                     {
-                        TicTacToe ticTacToe(resolution);
-                        RenderWindow TTT(VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
-                        while (TTT.isOpen())
+                        tic_tac_toe tic_tac_toe(resolution);
+                        sf::RenderWindow ttt(sf::VideoMode(resolution.x, resolution.y), "Tic Tac Toe");
+                        while (ttt.isOpen())
                         {
-                            Event eventTTT;
-                            while (TTT.pollEvent(eventTTT))
+                            sf::Event event_ttt;
+                            while (ttt.pollEvent(event_ttt))
                             {
-                                if (eventTTT.type == Event::Closed)
+                                if (event_ttt.type == sf::Event::Closed)
                                 {
-                                    TTT.close();
+                                    ttt.close();
                                 }
 
-                                else if (eventTTT.type == Event::KeyPressed)
+                                else if (event_ttt.type == sf::Event::KeyPressed)
                                 {
-                                    if (eventTTT.key.code == Keyboard::Escape)
+                                    if (event_ttt.key.code == sf::Keyboard::Escape)
                                     {
-                                        TTT.close();
+                                        ttt.close();
                                     }
-                                    else if (eventTTT.key.code == Keyboard::R)
+                                    else if (event_ttt.key.code == sf::Keyboard::R)
                                     {
-                                        ticTacToe.restart();
+                                        tic_tac_toe.restart();
                                     }
                                 }
-                                else if (eventTTT.type == Event::MouseButtonPressed)
+                                else if (event_ttt.type == sf::Event::MouseButtonPressed)
                                 {
-                                    if (eventTTT.mouseButton.button == Mouse::Left)
+                                    if (event_ttt.mouseButton.button == sf::Mouse::Left)
                                     {
-                                        ticTacToe.turn(eventTTT.mouseButton.x, eventTTT.mouseButton.y);
+                                        tic_tac_toe.turn(event_ttt.mouseButton.x, event_ttt.mouseButton.y);
                                     }
                                 }
                             }
-                            TTT.clear();
-                            ticTacToe.draw(TTT);
-                            TTT.display();
+                            ttt.clear();
+                            tic_tac_toe.draw(ttt);
+                            ttt.display();
                         }
                     }
 
                     // If player choose Guess The Number game
                     else if (main_menu.main_menu_pressed() == 2)
                     {
-                        guess_the_number guessTheNum(resolution);
-                        RenderWindow GtN(VideoMode(resolution.x, resolution.y), "Guess the Number");
-                        while (GtN.isOpen())
+                        guess_the_number guess_the_num(resolution);
+                        sf::RenderWindow gtn(sf::VideoMode(resolution.x, resolution.y), "Guess the Number");
+                        while (gtn.isOpen())
                         {
-                            Event eventGtN;
-                            while (GtN.pollEvent(eventGtN))
+                            sf::Event event_gtn;
+                            while (gtn.pollEvent(event_gtn))
                             {
-                                if (eventGtN.type == Event::Closed)
+                                if (event_gtn.type == sf::Event::Closed)
                                 {
-                                    GtN.close();
+                                    gtn.close();
                                 }
 
-                                else if (eventGtN.type == Event::KeyPressed)
+                                else if (event_gtn.type == sf::Event::KeyPressed)
                                 {
-                                    if (eventGtN.key.code == Keyboard::Escape)
+                                    if (event_gtn.key.code == sf::Keyboard::Escape)
                                     {
-                                        GtN.close();
+                                        gtn.close();
                                     }
-                                    else if (eventGtN.key.code == Keyboard::Left)
+                                    else if (event_gtn.key.code == sf::Keyboard::Left)
                                     {
-                                        guessTheNum.move_left();
+                                        guess_the_num.move_left();
                                     }
-                                    else if (eventGtN.key.code == Keyboard::Right)
+                                    else if (event_gtn.key.code == sf::Keyboard::Right)
                                     {
-                                        guessTheNum.move_right();
+                                        guess_the_num.move_right();
                                     }
-                                    else if (eventGtN.key.code == Keyboard::Return)
+                                    else if (event_gtn.key.code == sf::Keyboard::Return)
                                     {
-                                        guessTheNum.player_guess();
+                                        guess_the_num.player_guess();
                                     }
                                 }
                             }
-                            GtN.clear();
-                            guessTheNum.draw(GtN);
-                            GtN.display();
+                            gtn.clear();
+                            guess_the_num.draw(gtn);
+                            gtn.display();
                         }
                     }
 
@@ -167,7 +166,7 @@ int main()
                     }
                 }
 
-                else if (event.key.code == Keyboard::Escape)
+                else if (event.key.code == sf::Keyboard::Escape)
                 {
                     menu_window.close();
                 }
