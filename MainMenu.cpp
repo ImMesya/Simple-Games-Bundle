@@ -1,76 +1,76 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu(float width, float height) {
-	if (!font.loadFromFile("fonts/JellyBomb.ttf"))
-	{
-		cout << "Font not found";
-	}
+#include <iostream>
 
-	for (int i = 0; i < MAX_MAIN_MENU; i++)
-	{
-		mainMenu[i].setFont(font);
-		mainMenu[i].setFillColor(Color::White);
-		mainMenu[i].setCharacterSize(characterSize);
-		if (i == 0)
-		{
-			mainMenu[i].setString("Rock Paper Scissors");
-			mainMenu[i].setPosition(width / 2 - characterSize, height / 2 - (characterSize * 2 - 50));
-			mainMenu[i].setFillColor(Color::Blue);
-		}
-		if (i == 1)
-		{
-			mainMenu[i].setString("Tic Tac Toe");
-			mainMenu[i].setPosition(width / 2 - characterSize, height / 2 - (characterSize - 50));
-		}
-		if (i == 2)
-		{
-			mainMenu[i].setString("Guess The Number");
-			mainMenu[i].setPosition(width / 2 - characterSize, height / 2 + (characterSize - 20));
-		}
-		if (i == 3)
-		{
-			mainMenu[i].setString("Exit");
-			mainMenu[i].setPosition(width / 2 - characterSize, height / 2 + (characterSize * 2 - 20));
-		}
-	}
-}
-
-MainMenu::~MainMenu() {
-
-}
-
-void MainMenu::draw(RenderWindow& window) {
-	for (int i = 0; i < 4; i++)
-	{
-		window.draw(mainMenu[i]);
-	}
-}
-
-void MainMenu::moveUp() 
+main_menu::main_menu(const float width, const float height)
 {
-	mainMenu[MainMenuSelected].setFillColor(Color::White);
+    if (!font_.loadFromFile("fonts/JellyBomb.ttf"))
+    {
+        std::cout << "Font not found";
+    }
 
-	--MainMenuSelected;
-	if (MainMenuSelected == -1)
-	{
-		MainMenuSelected = 3;
-	}
-	mainMenu[MainMenuSelected].setFillColor(Color::Blue);
+    for (int i = 0; i < MAX_MAIN_MENU; i++)
+    {
+        main_menu_[i].setFont(font_);
+        main_menu_[i].setFillColor(sf::Color::White);
+        main_menu_[i].setCharacterSize(character_size_);
+        if (i == 0)
+        {
+            main_menu_[i].setString("Rock Paper Scissors");
+            main_menu_[i].setPosition(width / 2 - character_size_, height / 2 - (character_size_ * 2 - 50));
+            main_menu_[i].setFillColor(sf::Color::Blue);
+        }
+        if (i == 1)
+        {
+            main_menu_[i].setString("Tic Tac Toe");
+            main_menu_[i].setPosition(width / 2 - character_size_, height / 2 - (character_size_ - 50));
+        }
+        if (i == 2)
+        {
+            main_menu_[i].setString("Guess The Number");
+            main_menu_[i].setPosition(width / 2 - character_size_, height / 2 + (character_size_ - 20));
+        }
+        if (i == 3)
+        {
+            main_menu_[i].setString("Exit");
+            main_menu_[i].setPosition(width / 2 - character_size_, height / 2 + (character_size_ * 2 - 20));
+        }
+    }
 }
 
-void MainMenu::moveDown()
+void main_menu::draw(sf::RenderWindow& window)
 {
-	mainMenu[MainMenuSelected].setFillColor(Color::White);
-
-	++MainMenuSelected;
-	if (MainMenuSelected == 4)
-	{
-		MainMenuSelected = 0;
-	}
-	mainMenu[MainMenuSelected].setFillColor(Color::Blue);
+    for (const auto& i : main_menu_)
+    {
+        window.draw(i);
+    }
 }
 
-int MainMenu::mainMenuPressed()
+void main_menu::move_up()
 {
-	return MainMenuSelected;
+    main_menu_[main_menu_selected_].setFillColor(sf::Color::White);
+
+    --main_menu_selected_;
+    if (main_menu_selected_ == -1)
+    {
+        main_menu_selected_ = 3;
+    }
+    main_menu_[main_menu_selected_].setFillColor(sf::Color::Blue);
+}
+
+void main_menu::move_down()
+{
+    main_menu_[main_menu_selected_].setFillColor(sf::Color::White);
+
+    ++main_menu_selected_;
+    if (main_menu_selected_ == 4)
+    {
+        main_menu_selected_ = 0;
+    }
+    main_menu_[main_menu_selected_].setFillColor(sf::Color::Blue);
+}
+
+int main_menu::main_menu_pressed() const
+{
+    return main_menu_selected_;
 }

@@ -1,27 +1,23 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
-using namespace sf;
-using namespace std;
 
 #define MAX_MAIN_MENU 4
 
-class MainMenu
+class main_menu
 {
 public:
-	MainMenu(float width, float height);
+    main_menu(float width, float height);
 
-	void draw(RenderWindow& window);
-	void moveUp();
-	void moveDown();
+    void draw(sf::RenderWindow& window);
+    void move_up();
+    void move_down();
 
-	int mainMenuPressed();
+    int main_menu_pressed() const;
 
-	~MainMenu();
 private:
-	int MainMenuSelected = 0;
-	const int characterSize = 70;
-	Font font;
-	Text mainMenu[MAX_MAIN_MENU];
+    int main_menu_selected_ = 0;
+    const float character_size_ = 70.0f;
+    sf::Font font_;
+    sf::Text main_menu_[MAX_MAIN_MENU];
 };

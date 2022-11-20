@@ -1,28 +1,23 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <ctime>
-#include <iostream>
 
-using namespace sf;
-using namespace std;
-
-class GuessTheNumber
+class guess_the_number
 {
 public:
-	explicit GuessTheNumber(Vector2f resolution);
+    explicit guess_the_number(sf::Vector2f resolution);
 
-	void moveLeft();
-	void moveRight();
+    void move_left();
+    void move_right();
 
-	void playerGuess();
+    void player_guess();
 
-	void draw(RenderWindow& window);
+    void draw(sf::RenderWindow& window);
 
 private:
-	Font font;
-	const int characterSize = 70;
-	Text numbers[10];
-	int numberSelected = 0;
-	Text guess;
-	int rndmNum;
+    sf::Font font_;
+    const int character_size_ = 70;
+    sf::Text numbers_[10];
+    int number_selected_ = 0;
+    sf::Text guess_;
+    int random_num_;
 };
