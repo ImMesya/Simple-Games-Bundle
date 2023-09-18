@@ -1,15 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class guess_the_number
+class GuessTheNumber
 {
 public:
-    explicit guess_the_number(sf::Vector2f resolution);
+    explicit GuessTheNumber(sf::Vector2f resolution);
 
-    void move_left();
-    void move_right();
+    void moveLeft();
+    void moveRight();
 
-    void player_guess();
+    void playerGuess();
 
     void draw(sf::RenderWindow& window);
 

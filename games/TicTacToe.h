@@ -1,10 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class tic_tac_toe
+class TicTacToe
 {
 public:
-    explicit tic_tac_toe(sf::Vector2f resolution);
+    explicit TicTacToe(sf::Vector2f resolution);
 
     void draw(sf::RenderWindow& window);
 

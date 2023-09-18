@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-guess_the_number::guess_the_number(sf::Vector2f resolution)
+GuessTheNumber::GuessTheNumber(sf::Vector2f resolution)
 {
     srand(time(NULL));
 
@@ -30,7 +30,7 @@ guess_the_number::guess_the_number(sf::Vector2f resolution)
     random_num_ = rand() % 10;
 }
 
-void guess_the_number::move_left()
+void GuessTheNumber::moveLeft()
 {
     numbers_[number_selected_].setFillColor(sf::Color::White);
 
@@ -42,7 +42,7 @@ void guess_the_number::move_left()
     numbers_[number_selected_].setFillColor(sf::Color::Blue);
 }
 
-void guess_the_number::move_right()
+void GuessTheNumber::moveRight()
 {
     numbers_[number_selected_].setFillColor(sf::Color::White);
 
@@ -54,7 +54,7 @@ void guess_the_number::move_right()
     numbers_[number_selected_].setFillColor(sf::Color::Blue);
 }
 
-void guess_the_number::player_guess()
+void GuessTheNumber::playerGuess()
 {
     if (random_num_ > number_selected_)
     {
@@ -71,7 +71,7 @@ void guess_the_number::player_guess()
     }
 }
 
-void guess_the_number::draw(sf::RenderWindow& window)
+void GuessTheNumber::draw(sf::RenderWindow& window)
 {
     window.draw(guess_);
 

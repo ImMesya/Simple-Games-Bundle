@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-tic_tac_toe::tic_tac_toe(sf::Vector2f resolution)
+TicTacToe::TicTacToe(sf::Vector2f resolution)
 {
     if (!font_.loadFromFile("fonts/JellyBomb.ttf"))
     {
@@ -58,7 +58,7 @@ tic_tac_toe::tic_tac_toe(sf::Vector2f resolution)
     blank_sprite_[9].setPosition(resolution.x / 2 + 300, resolution.y / 2 + 300);
 }
 
-void tic_tac_toe::draw(sf::RenderWindow& window)
+void TicTacToe::draw(sf::RenderWindow& window)
 {
     window.draw(grid_sprite_);
     window.draw(instructions_);
@@ -69,7 +69,7 @@ void tic_tac_toe::draw(sf::RenderWindow& window)
     }
 }
 
-void tic_tac_toe::turn(int mouse_x, int mouse_y)
+void TicTacToe::turn(int mouse_x, int mouse_y)
 {
     const sf::Vector2f mouseCoord(mouse_x, mouse_y);
     for (int i = 1; i < 10; i++)
@@ -123,7 +123,7 @@ void tic_tac_toe::turn(int mouse_x, int mouse_y)
     }
 }
 
-bool tic_tac_toe::check_winner(sf::Texture& mark)
+bool TicTacToe::check_winner(sf::Texture& mark)
 {
     if (blank_sprite_[1].getTexture() == &mark && blank_sprite_[2].getTexture() == &mark && blank_sprite_[3].
         getTexture() == &mark)
@@ -162,7 +162,7 @@ bool tic_tac_toe::check_winner(sf::Texture& mark)
     }
 }
 
-void tic_tac_toe::restart()
+void TicTacToe::restart()
 {
     is_draw_ = false;
     is_x_turn_ = true;

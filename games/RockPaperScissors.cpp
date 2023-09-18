@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-rock_paper_scissors::rock_paper_scissors(float width, float height)
+RockPaperScissors::RockPaperScissors(const sf::Vector2f& resolution)
 {
     if (!rock_.loadFromFile("images/rock_paper_scissors.png",
                             sf::IntRect(sprite_width_ * 2, 0, sprite_width_, sprite_height_)))
@@ -26,9 +26,9 @@ rock_paper_scissors::rock_paper_scissors(float width, float height)
     bot_paper_.setOrigin(sprite_width_ / 2, sprite_height_ / 2);
     bot_scissors_.setOrigin(sprite_width_ / 2, sprite_height_ / 2);
 
-    rock_sprite_.setPosition(width / 2 - sprite_width_ * 3, height / 2);
-    paper_sprite_.setPosition(width / 2, height / 2);
-    scissors_sprite_.setPosition(width / 2 + sprite_width_ * 3, height / 2);
+    rock_sprite_.setPosition(resolution.x / 2 - sprite_width_ * 3, resolution.y / 2);
+    paper_sprite_.setPosition(resolution.x / 2, resolution.y / 2);
+    scissors_sprite_.setPosition(resolution.x / 2 + sprite_width_ * 3, resolution.y / 2);
     bot_paper_.setPosition(-sprite_width_, -sprite_height_);
     bot_rock_.setPosition(-sprite_width_, -sprite_height_);
     bot_scissors_.setPosition(-sprite_width_, -sprite_height_);
@@ -69,7 +69,7 @@ rock_paper_scissors::rock_paper_scissors(float width, float height)
     ur_wins_.setString(ss_player.str());
     ss_bot << "Computer wins - " << bot_wins_count_;
     bot_wins_.setString(ss_bot.str());
-    winner_.setPosition(width / 2.5, height / 2.5);
+    winner_.setPosition(resolution.x / 2.5, resolution.y / 2.5);
     ur_wins_.setPosition(20, 10);
     bot_wins_.setPosition(20, 90);
 
@@ -100,7 +100,7 @@ rock_paper_scissors::rock_paper_scissors(float width, float height)
     }
 }
 
-void rock_paper_scissors::draw(sf::RenderWindow& window)
+void RockPaperScissors::draw(sf::RenderWindow& window)
 {
     window.draw(rock_sprite_);
     window.draw(scissors_sprite_);
@@ -118,7 +118,7 @@ void rock_paper_scissors::draw(sf::RenderWindow& window)
     }
 }
 
-void rock_paper_scissors::move_left()
+void RockPaperScissors::moveLeft()
 {
     text_rps_[rps_selected_].setFillColor(sf::Color::White);
 
@@ -130,7 +130,7 @@ void rock_paper_scissors::move_left()
     text_rps_[rps_selected_].setFillColor(sf::Color::Blue);
 }
 
-void rock_paper_scissors::move_right()
+void RockPaperScissors::moveRight()
 {
     text_rps_[rps_selected_].setFillColor(sf::Color::White);
 
@@ -143,7 +143,7 @@ void rock_paper_scissors::move_right()
 }
 
 
-void rock_paper_scissors::rps_pressed(sf::Vector2f resolution)
+void RockPaperScissors::rpsPressed(sf::Vector2f resolution)
 {
     const int bot = rand() % 3;
 

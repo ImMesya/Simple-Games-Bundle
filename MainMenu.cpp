@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-main_menu::main_menu(const float width, const float height)
+MainMenu::MainMenu(const float width, const float height)
 {
     if (!font_.loadFromFile("fonts/JellyBomb.ttf"))
     {
@@ -38,7 +38,7 @@ main_menu::main_menu(const float width, const float height)
     }
 }
 
-void main_menu::draw(sf::RenderWindow& window)
+void MainMenu::draw(sf::RenderWindow& window)
 {
     for (const auto& i : main_menu_)
     {
@@ -46,7 +46,7 @@ void main_menu::draw(sf::RenderWindow& window)
     }
 }
 
-void main_menu::move_up()
+void MainMenu::moveUp()
 {
     main_menu_[main_menu_selected_].setFillColor(sf::Color::White);
 
@@ -58,7 +58,7 @@ void main_menu::move_up()
     main_menu_[main_menu_selected_].setFillColor(sf::Color::Blue);
 }
 
-void main_menu::move_down()
+void MainMenu::moveDown()
 {
     main_menu_[main_menu_selected_].setFillColor(sf::Color::White);
 
@@ -70,7 +70,7 @@ void main_menu::move_down()
     main_menu_[main_menu_selected_].setFillColor(sf::Color::Blue);
 }
 
-int main_menu::main_menu_pressed() const
+int MainMenu::getChoice() const
 {
     return main_menu_selected_;
 }

@@ -1,17 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class rock_paper_scissors
+class RockPaperScissors
 {
 public:
-    rock_paper_scissors(float width, float height);
+    RockPaperScissors(const sf::Vector2f& resolution);
 
     void draw(sf::RenderWindow& window);
 
-    void move_left();
-    void move_right();
+    void moveLeft();
+    void moveRight();
 
-    void rps_pressed(sf::Vector2f resolution);
+    void rpsPressed(sf::Vector2f resolution);
 
 private:
     const int sprite_width_ = 108;

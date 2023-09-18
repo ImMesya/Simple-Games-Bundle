@@ -4,16 +4,16 @@
 
 #define MAX_MAIN_MENU 4
 
-class main_menu
+class MainMenu
 {
 public:
-    main_menu(float width, float height);
+    MainMenu(float width, float height);
 
     void draw(sf::RenderWindow& window);
-    void move_up();
-    void move_down();
+    void moveUp();
+    void moveDown();
 
-    int main_menu_pressed() const;
+    int getChoice() const;
 
 private:
     int main_menu_selected_ = 0;
